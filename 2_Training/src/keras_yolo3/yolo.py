@@ -132,7 +132,7 @@ class YOLO(object):
         )
         return boxes, scores, classes
 
-    def detect_image(self, image, show_stats=True):
+    def detect_image(self, image, show_stats=False):
         start = timer()
 
         if self.model_image_size != (None, None):
@@ -225,6 +225,18 @@ class YOLO(object):
 def detect_video(yolo, video_path, output_path=""):
     import cv2
 
+    # Make a dataframe for the prediction outputs
+    out_df = pd.DataFrame(
+        columns=[
+            "frame",
+            "xmin",
+            "ymin",
+            "xmax",
+            "ymax",
+            "label",
+            "confidence",
+        ]
+    )
     vid = cv2.VideoCapture(video_path)
     if not vid.isOpened():
         raise IOError("Couldn't open webcam or video")
@@ -247,6 +259,7 @@ def detect_video(yolo, video_path, output_path=""):
     curr_fps = 0
     fps = "FPS: ??"
     prev_time = timer()
+    frame_no = 0
     while vid.isOpened():
         return_value, frame = vid.read()
         if not return_value:
@@ -255,6 +268,30 @@ def detect_video(yolo, video_path, output_path=""):
         frame = frame[:, :, ::-1]
         image = Image.fromarray(frame)
         out_pred, image = yolo.detect_image(image, show_stats=False)
+        frame_no += 1
+
+        #create csv file for the video
+        for single_prediction in out_pred:
+            print([[frame_no] + single_prediction])
+            out_df = out_df.append(
+                pd.DataFrame(
+                    [
+                    [frame_no]
+                    + single_prediction
+                    ],
+                    columns=[
+                        "frame",
+                        "xmin",
+                        "ymin",
+                        "xmax",
+                        "ymax",
+                        "label",
+                        "confidence",
+                    ],
+                ), sort = False
+            )
+
+
         result = np.asarray(image)
         curr_time = timer()
         exec_time = curr_time - prev_time
@@ -280,6 +317,9 @@ def detect_video(yolo, video_path, output_path=""):
             out.write(result[:, :, ::-1])
         # if cv2.waitKey(1) & 0xFF == ord('q'):
         #     break
+
     vid.release()
     out.release()
+
+    return out_df
     # yolo.close_session()

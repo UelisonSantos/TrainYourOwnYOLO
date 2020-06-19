@@ -137,7 +137,7 @@ if __name__ == "__main__":
         "--postfix",
         type=str,
         dest="postfix",
-        default="_catface",
+        default="_BrainAction",
         help='Specify the postfix for images with bounding boxes. Default is "_catface"',
     )
 
@@ -199,21 +199,21 @@ if __name__ == "__main__":
     # labels to draw on images
     class_file = open(FLAGS.classes_path, "r")
     input_labels = [line.rstrip("\n") for line in class_file.readlines()]
-    print("Found {} input labels: {} ...".format(len(input_labels), input_labels))
+    #print("Found {} input labels: {} ...".format(len(input_labels), input_labels))
 
     if input_image_paths:
-        print(
-            "Found {} input images: {} ...".format(
-                len(input_image_paths),
-                [os.path.basename(f) for f in input_image_paths[:5]],
-            )
-        )
-        start = timer()
+        # print(
+        #     "Found {} input images: {} ...".format(
+        #         len(input_image_paths),
+        #         [os.path.basename(f) for f in input_image_paths[:5]],
+        #     )
+        # )
+        #start = timer()
         text_out = ""
 
         # This is for images
         for i, img_path in enumerate(input_image_paths):
-            print(img_path)
+            #print(img_path)
             prediction, image = detect_object(
                 yolo,
                 img_path,
@@ -223,6 +223,7 @@ if __name__ == "__main__":
             )
             y_size, x_size, _ = np.array(image).shape
             for single_prediction in prediction:
+                print(img_path.rstrip("\n"), single_prediction)
                 out_df = out_df.append(
                     pd.DataFrame(
                         [
@@ -247,14 +248,14 @@ if __name__ == "__main__":
                         ],
                     )
                 )
-        end = timer()
-        print(
-            "Processed {} images in {:.1f}sec - {:.1f}FPS".format(
-                len(input_image_paths),
-                end - start,
-                len(input_image_paths) / (end - start),
-            )
-        )
+        #end = timer()
+        # print(
+        #     "Processed {} images in {:.1f}sec - {:.1f}FPS".format(
+        #         len(input_image_paths),
+        #         end - start,
+        #         len(input_image_paths) / (end - start),
+        #     )
+        # )
         out_df.to_csv(FLAGS.box, index=False)
 
     # This is for videos
@@ -265,7 +266,7 @@ if __name__ == "__main__":
                 [os.path.basename(f) for f in input_video_paths[:5]],
             )
         )
-        start = timer()
+        #start = timer()
         for i, vid_path in enumerate(input_video_paths):
             output_path = os.path.join(
                 FLAGS.output,
@@ -273,11 +274,13 @@ if __name__ == "__main__":
             )
             detect_video(yolo, vid_path, output_path=output_path)
 
-        end = timer()
-        print(
-            "Processed {} videos in {:.1f}sec".format(
-                len(input_video_paths), end - start
-            )
-        )
-    # Close the current yolo session
+        #end = timer()
+        # print(
+        #     "Processed {} videos in {:.1f}sec".format(
+        #         len(input_video_paths), end - start
+        #     )
+        # )
+        out_df_video = detect_video(yolo, vid_path, output_path=output_path)
+        out_df_video.to_csv(FLAGS.box, index=False)
+        # Close the current yolo session
     yolo.close_session()

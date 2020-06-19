@@ -148,7 +148,7 @@ if __name__ == "__main__":
     anchors = get_anchors(FLAGS.anchors_path)
     weights_path = FLAGS.weights_path
 
-    input_shape = (416, 416)  # multiple of 32, height, width
+    input_shape = (320, 320)  # multiple of 32, height, width
     epoch1, epoch2 = FLAGS.epochs, FLAGS.epochs
 
     is_tiny_version = len(anchors) == 6  # default setting
@@ -237,6 +237,8 @@ if __name__ == "__main__":
     # Unfreeze and continue training, to fine-tune.
     # Train longer if the result is unsatisfactory.
     if True:
+
+        K.clear_session()
         for i in range(len(model.layers)):
             model.layers[i].trainable = True
         model.compile(

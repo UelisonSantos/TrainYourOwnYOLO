@@ -20,6 +20,9 @@ from keras.regularizers import l2
 
 from ..yolo3.utils import compose
 
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+
 
 @wraps(Conv2D)
 def DarknetConv2D(*args, **kwargs):
