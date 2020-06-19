@@ -17,9 +17,13 @@ Once you are familiar with the code, you're welcome to modify it. Please only co
 If you have followed the instructions exactly, couldn't solve your problem with the provided troubleshooting tips and would still like to file a bug or make a feature requests please follow the steps below.
 
 1. It must be a bug, a feature request, or a significant problem with the documentation (for small docs fixes please send a PR instead).
-2. The form below must be filled out.
+2. **Every section** of the form below must be filled out.
 
 ------------------------
+
+### Readme 
+
+- I have followed all Readme instructions carefully word by word: **Answer**
 
 ### System information
 - **What is the top-level directory of the model you are using**:
