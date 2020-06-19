@@ -1,3 +1,6 @@
+#images
+.jpg
+
 # Keras model files
 *.h5
 *.weights
