@@ -148,7 +148,7 @@ if __name__ == "__main__":
     anchors = get_anchors(FLAGS.anchors_path)
     weights_path = FLAGS.weights_path
 
-    input_shape = (320, 320)  # multiple of 32, height, width
+    input_shape = (416, 416)  # multiple of 32, height, width
     epoch1, epoch2 = FLAGS.epochs, FLAGS.epochs
 
     is_tiny_version = len(anchors) == 6  # default setting
@@ -197,7 +197,7 @@ if __name__ == "__main__":
             },
         )
 
-        batch_size = 32
+        batch_size = 4
         print(
             "Train on {} samples, val on {} samples, with batch size {}.".format(
                 num_train, num_val, batch_size
@@ -238,7 +238,6 @@ if __name__ == "__main__":
     # Train longer if the result is unsatisfactory.
     if True:
 
-        K.clear_session()
         for i in range(len(model.layers)):
             model.layers[i].trainable = True
         model.compile(
@@ -246,9 +245,8 @@ if __name__ == "__main__":
         )  # recompile to apply the change
         print("Unfreeze all layers.")
 
-        batch_size = (
-            4  # note that more GPU memory is required after unfreezing the body
-        )
+        batch_size = 4  # note that more GPU memory is required after unfreezing the body
+
         print(
             "Train on {} samples, val on {} samples, with batch size {}.".format(
                 num_train, num_val, batch_size

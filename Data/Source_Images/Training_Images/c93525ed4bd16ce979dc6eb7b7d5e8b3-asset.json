@@ -1,0 +1,48 @@
+{
+    "asset": {
+        "format": "jpg",
+        "id": "c93525ed4bd16ce979dc6eb7b7d5e8b3",
+        "name": "ReturnSyringe_14_0.jpg",
+        "path": "file:D:/Dataset/All%20data/ReturnSyringe_14_0.jpg",
+        "size": {
+            "width": 1920,
+            "height": 1080
+        },
+        "state": 2,
+        "type": 1
+    },
+    "regions": [
+        {
+            "id": "CrcH9HWsg",
+            "type": "RECTANGLE",
+            "tags": [
+                "Syringe"
+            ],
+            "boundingBox": {
+                "height": 95.75257731958763,
+                "width": 108.02784222737819,
+                "left": 1453.9211136890951,
+                "top": 748.6237113402062
+            },
+            "points": [
+                {
+                    "x": 1453.9211136890951,
+                    "y": 748.6237113402062
+                },
+                {
+                    "x": 1561.9489559164733,
+                    "y": 748.6237113402062
+                },
+                {
+                    "x": 1561.9489559164733,
+                    "y": 844.3762886597939
+                },
+                {
+                    "x": 1453.9211136890951,
+                    "y": 844.3762886597939
+                }
+            ]
+        }
+    ],
+    "version": "2.1.0"
+}

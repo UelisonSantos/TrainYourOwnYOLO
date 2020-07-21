@@ -1,0 +1,48 @@
+{
+    "asset": {
+        "format": "jpg",
+        "id": "9c197316cfe9a4dda69ca0c4bdd7bb83",
+        "name": "ReturnSyringe_9_0.jpg",
+        "path": "file:D:/Dataset/All%20data/ReturnSyringe_9_0.jpg",
+        "size": {
+            "width": 1920,
+            "height": 1080
+        },
+        "state": 2,
+        "type": 1
+    },
+    "regions": [
+        {
+            "id": "IEJow_rza",
+            "type": "RECTANGLE",
+            "tags": [
+                "Hand"
+            ],
+            "boundingBox": {
+                "height": 100.20618556701031,
+                "width": 103.57308584686774,
+                "left": 1456.1484918793503,
+                "top": 746.3969072164949
+            },
+            "points": [
+                {
+                    "x": 1456.1484918793503,
+                    "y": 746.3969072164949
+                },
+                {
+                    "x": 1559.7215777262181,
+                    "y": 746.3969072164949
+                },
+                {
+                    "x": 1559.7215777262181,
+                    "y": 846.6030927835052
+                },
+                {
+                    "x": 1456.1484918793503,
+                    "y": 846.6030927835052
+                }
+            ]
+        }
+    ],
+    "version": "2.1.0"
+}
